@@ -1,6 +1,8 @@
 import StreamParser from "./parser.ts";
 import { Credentials } from "./models.ts"
 import { deepAssign as merge } from "https://deno.land/std/_util/deep_assign.ts";
+import * as oauth from 'https://raw.githubusercontent.com/snsinfu/deno-oauth-1.0a/main/mod.ts';
+
 // Package version
 const VERSION = 0.1;
 
@@ -48,14 +50,31 @@ class SimpleTwitter {
       },
     };
 
+    const client = new oauth.OAuthClient({
+      consumer: {key: this.options.consumer_key, secret: this.options.consumer_secret},
+      signature: oauth.HMAC_SHA1,
+  });
+  const auth = oauth.toAuthHeader(
+      client.sign('POST', url, {
+          token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
+      })
+  );
+  
+
+  const headers = new Headers();
+  headers.set("Authorization", auth);
+  authentication_options = {
+    headers: headers,
+  };
+
     // Check to see if we are going to use User Authentication or Application Authetication
-    if (this.options.bearer_token) {
-      const headers = new Headers();
-      headers.set("Authorization", "Bearer " + this.options.bearer_token);
-      authentication_options = {
-        headers: headers,
-      };
-    }
+    // if (this.options.bearer_token) {
+    //   const headers = new Headers();
+    //   headers.set("Authorization", "Bearer " + this.options.bearer_token);
+    //   authentication_options = {
+    //     headers: headers,
+    //   };
+    // }
 
     // Configure default request options
     this.requestDefaults = merge(
