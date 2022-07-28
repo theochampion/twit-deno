@@ -33,22 +33,22 @@ class SimpleTwitter {
       options,
     );
 
-    let authentication_options: {
-      oauth?: {
-        consumer_key: string;
-        consumer_secret: string;
-        token: string;
-        token_secret: string;
-      };
-      headers?: Headers;
-    } = {
-      oauth: {
-        consumer_key: this.options.consumer_key,
-        consumer_secret: this.options.consumer_secret,
-        token: this.options.access_token_key,
-        token_secret: this.options.access_token_secret,
-      },
-    };
+    // let authentication_options: {
+    //   oauth?: {
+    //     consumer_key: string;
+    //     consumer_secret: string;
+    //     token: string;
+    //     token_secret: string;
+    //   };
+    //   headers?: Headers;
+    // } = {
+    //   oauth: {
+    //     consumer_key: this.options.consumer_key,
+    //     consumer_secret: this.options.consumer_secret,
+    //     token: this.options.access_token_key,
+    //     token_secret: this.options.access_token_secret,
+    //   },
+    // };
 
 
     // Check to see if we are going to use User Authentication or Application Authetication
@@ -61,10 +61,10 @@ class SimpleTwitter {
     // }
 
     // Configure default request options
-    this.requestDefaults = merge(
-      authentication_options,
-      this.options.request_options,
-    );
+    // this.requestDefaults = merge(
+    //   authentication_options,
+    //   this.options.request_options,
+    // );
   }
 
   __buildEndpoint(path: string, credential: keyof Credentials) {
@@ -148,19 +148,19 @@ class SimpleTwitter {
           token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
       })
   );
+  console.log("auth", `"${auth}"`)
   
-  const nh = {...options.headers, Authorization: auth};
+
+const opt = {...options, headers: {...options.headers, Authorization: auth}}
 
 
-console.log("nh", nh)
-
-    const request = new Request(url, {...options, headers: nh});
-console.log("request", request)
-console.log("options", options)
+    // const request = new Request(url, {...options, headers: nh});
+// console.log("request", request)
+console.log("opt", opt)
     // Promisified version
     if (promise) {
       return new Promise(function (resolve: any, reject: any) {
-        fetch(request)
+        fetch(url, opt)
           .then((res) => res.json())
           .then((data) => {
             // response object errors
