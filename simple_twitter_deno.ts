@@ -136,7 +136,7 @@ class SimpleTwitter {
       url += qs;
     // }
 
-    console.log(url)
+    // console.log(url)
 
 
     const client = new oauth.OAuthClient({
@@ -148,7 +148,7 @@ class SimpleTwitter {
           token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
       })
   );
-  console.log("auth", `"${auth}"`)
+  // console.log("auth", `"${auth}"`)
   
 
 const opt = {...options, headers: {...options.headers, Authorization: auth}}
@@ -156,7 +156,7 @@ const opt = {...options, headers: {...options.headers, Authorization: auth}}
 
     // const request = new Request(url, {...options, headers: nh});
 // console.log("request", request)
-console.log("opt", opt)
+// console.log("opt", opt)
     // Promisified version
     if (promise) {
       return new Promise(function (resolve: any, reject: any) {
