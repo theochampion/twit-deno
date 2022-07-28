@@ -136,8 +136,10 @@ class SimpleTwitter {
     console.log(url)
 
 
-    const request = new Request(url, options);
 
+    const request = new Request(url, options);
+console.log(request)
+console.log(options)
     // Promisified version
     if (promise) {
       return new Promise(function (resolve: any, reject: any) {
