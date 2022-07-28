@@ -149,14 +149,14 @@ class SimpleTwitter {
       })
   );
   
-  
+  const nh = {...options.headers, Authorization: auth};
 
 
+console.log("nh", nh)
 
-
-    const request = new Request(url, {...options, headers: {...options.headers, Authorization: auth}});
-console.log(request)
-console.log(options)
+    const request = new Request(url, {...options, headers: nh});
+console.log("request", request)
+console.log("options", options)
     // Promisified version
     if (promise) {
       return new Promise(function (resolve: any, reject: any) {
