@@ -50,22 +50,6 @@ class SimpleTwitter {
       },
     };
 
-    const client = new oauth.OAuthClient({
-      consumer: {key: this.options.consumer_key, secret: this.options.consumer_secret},
-      signature: oauth.HMAC_SHA1,
-  });
-  const auth = oauth.toAuthHeader(
-      client.sign('POST', url, {
-          token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
-      })
-  );
-  
-
-  const headers = new Headers();
-  headers.set("Authorization", auth);
-  authentication_options = {
-    headers: headers,
-  };
 
     // Check to see if we are going to use User Authentication or Application Authetication
     // if (this.options.bearer_token) {
@@ -155,8 +139,21 @@ class SimpleTwitter {
     console.log(url)
 
 
+    const client = new oauth.OAuthClient({
+      consumer: {key: this.options.consumer_key, secret: this.options.consumer_secret},
+      signature: oauth.HMAC_SHA1,
+  });
+  const auth = oauth.toAuthHeader(
+      client.sign('POST', url, {
+          token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
+      })
+  );
+  
 
-    const request = new Request(url, options);
+
+
+
+    const request = new Request(url, {...options, headers: {...options.headers, Authorization: auth}});
 console.log(request)
 console.log(options)
     // Promisified version
