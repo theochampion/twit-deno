@@ -61,7 +61,7 @@ class SimpleTwitter {
     // }
 
     // Configure default request options
-    // this.requestDefaults = merge(
+    this.requestDefaults = this.options.request_options//merge(
     //   authentication_options,
     //   this.options.request_options,
     // );
