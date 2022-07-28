@@ -127,12 +127,14 @@ class SimpleTwitter {
     });
 
     let url = this.__buildEndpoint(path, credential); // Generate url
-
     // Pass url parameters if get
-    if (method === "get") {
+    // if (method === "get") {
       const qs = "?" + new URLSearchParams(params).toString();
       url += qs;
-    }
+    // }
+
+    console.log(url)
+
 
     const request = new Request(url, options);
 
