@@ -144,7 +144,7 @@ class SimpleTwitter {
       signature: oauth.HMAC_SHA1,
   });
   const auth = oauth.toAuthHeader(
-      client.sign('POST', url, {
+      client.sign(method.toLocaleUpperCase(), url, {
           token: {key: this.options.access_token_key, secret: this.options.access_token_secret},
       })
   );
