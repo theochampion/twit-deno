@@ -151,7 +151,7 @@ class SimpleTwitter {
   // console.log("auth", `"${auth}"`)
   
 
-const opt = {...options, headers: {...options.headers, Authorization: auth}}
+const opt = {...options, headers: {...options.headers, Authorization: auth}, body: JSON.stringify(params)}
 
 
     // const request = new Request(url, {...options, headers: nh});
