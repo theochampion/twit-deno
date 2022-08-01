@@ -162,7 +162,7 @@ const opt = {...options, headers: {...options.headers, Authorization: auth}}
       return new Promise(function (resolve: any, reject: any) {
         fetch(url, opt)
         .then(res => {
-          if (res.status !== 200) return reject(`Error: Status ${res.status}, ${await res.text()}`)
+          if (res.status !== 200) return reject(`Error: Status ${res.status}`)
           return res.json()
         })
           .then((data) => {
