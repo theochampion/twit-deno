@@ -161,7 +161,10 @@ const opt = {...options, headers: {...options.headers, Authorization: auth}}
     if (promise) {
       return new Promise(function (resolve: any, reject: any) {
         fetch(url, opt)
-          .then((res) => res.json())
+        .then(res => {
+          if (res.status !== 200) return reject(`Error: Status ${res.status}, ${await res.text()}`)
+          return res.json()
+        })
           .then((data) => {
             // response object errors
             // This should return an error object not an array of errors
